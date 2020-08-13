@@ -1,0 +1,1 @@
+# @zekfad/eslint-config
