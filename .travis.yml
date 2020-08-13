@@ -5,12 +5,13 @@ env:
   - mode=dev
 before_script: yarn build
 jobs:
-  include:
+  allow_failures:
   - name: Node 10
     node_js: 10
   - name: Node 11
     node_js: 11
     install: yarn install --frozen-lockfile --ignore-engines
+  include:
   - name: Node 12
     node_js: 12
   - name: Node 13
