@@ -1,12 +1,16 @@
 const
 	assert = require('assert'),
-	{ ESLint, } = require('eslint'),
 
-	extensions = [
-		'.js',
-		'.cjs',
-		'.mjs',
-	];
+	// eslint-disable-next-line import/no-extraneous-dependencies
+	{ ESLint, } = require('eslint');
+
+
+const extensions = [
+	'.js',
+	'.cjs',
+	'.mjs',
+];
+
 
 function formatMessages(messages) {
 	const errors = messages

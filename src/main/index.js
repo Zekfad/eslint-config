@@ -24,6 +24,7 @@ const config = {
 		'eslint:recommended',
 		'plugin:import/errors',
 		'plugin:import/warnings',
+		//'plugin:node/recommended', // TODO: fix this up.
 	],
 	globals: {
 		Atomics          : 'readonly',
@@ -46,6 +47,58 @@ const config = {
 			'error',
 			{
 				commonjs: true,
+			},
+		],
+		'import/named'    : [ 'error', ],
+		'import/default'  : [ 'error', ],
+		'import/namespace': [
+			'error', {
+				'allowComputed': true,
+			},
+		],
+		'import/no-absolute-path'          : [ 'error', ],
+		'import/no-dynamic-require'        : [ 'warn', ],
+		'import/no-internal-modules'       : [ 'off', ],
+		'import/no-webpack-loader-syntax'  : [ 'off', ],
+		'import/no-self-import'            : [ 'error', ],
+		'import/no-cycle'                  : [ 'off', ],
+		'import/no-relative-parent-imports': [ 'off', ],
+		'import/no-useless-path-segments'  : [ 'error', ],
+		'import/export'                    : [ 'error', ],
+		'import/no-named-as-default'       : [ 'error', ],
+		'import/no-deprecated'             : [ 'warn', ],
+		'import/no-extraneous-dependencies': [
+			'error', {
+				devDependencies     : true,
+				optionalDependencies: true,
+				peerDependencies    : true,
+				bundledDependencies : true,
+			},
+		],
+		'import/no-mutable-exports': [ 'error', ],
+		// 'import/no-unused-modules': [ 'error, {}, ],
+		'import/order'             : [
+			'error',
+			{
+				'groups': [
+					'builtin',
+					'external',
+					'internal',
+					'parent',
+					'sibling',
+					'index',
+					'object',
+				],
+				'newlines-between': 'always-and-inside-groups',
+				alphabetize       : {
+					order: 'asc',
+				},
+			},
+		],
+		'import/newline-after-import': [
+			'error',
+			{
+				'count': 2,
 			},
 		],
 		'no-control-regex': [ 'off', ],
