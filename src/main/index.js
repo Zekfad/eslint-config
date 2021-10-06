@@ -30,9 +30,10 @@ const config = {
 		Atomics          : 'readonly',
 		SharedArrayBuffer: 'readonly',
 	},
-	parser       : 'babel-eslint',
+	parser       : '@babel/eslint-parser',
 	parserOptions: {
-		ecmaVersion: 2020,
+		ecmaVersion      : 2020,
+		requireConfigFile: false,
 	},
 	settings: {
 		'import/extensions': [

@@ -31,8 +31,9 @@ const config = {
 	],
 	parser       : 'vue-eslint-parser',
 	parserOptions: {
-		parser     : 'babel-eslint',
-		ecmaVersion: 2020,
+		parser           : '@babel/eslint-parser',
+		ecmaVersion      : 2020,
+		requireConfigFile: false,
 	},
 	settings: {
 		'import/resolver': {
