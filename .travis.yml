@@ -9,6 +9,7 @@ jobs:
   allow_failures:
   - name: Node 10
   - name: Node 11
+  - name: Latest Node - OSX
   include:
   - name: Node 10
     node_js: 10
