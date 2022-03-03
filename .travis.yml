@@ -1,32 +1,31 @@
 language: node_js
 os: linux
 dist: xenial
+install: yarn install --frozen-lockfile --ignore-engines
+before_script: yarn build
 env:
   - mode=dev
-before_script: yarn build
 jobs:
   allow_failures:
   - name: Node 10
   - name: Node 11
-  - name: Node 13
   include:
   - name: Node 10
     node_js: 10
-    install: yarn install --frozen-lockfile --ignore-engines
   - name: Node 11
     node_js: 11
-    install: yarn install --frozen-lockfile --ignore-engines
   - name: Node 12
     node_js: 12
   - name: Node 13
     node_js: 13
-    install: yarn install --frozen-lockfile --ignore-engines
   - name: Node 14
     node_js: 14
   - name: Node 15
     node_js: 15
   - name: Node 16
     node_js: 16
+  - name: Node 17
+    node_js: 17
 #  - name: Latest Node - Windows
 #    node_js: node
 #    os: windows
