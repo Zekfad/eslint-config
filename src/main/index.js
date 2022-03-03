@@ -4,7 +4,6 @@
 
 /**
  * Base ESLint config.
- * @type object
  */
 const config = {
 	overrides: [
@@ -36,12 +35,17 @@ const config = {
 		requireConfigFile: false,
 	},
 	settings: {
-		'import/extensions': [
-			'.js',
-			'.mjs',
-			'.cjs',
-			'.json',
-		],
+		'import/resolver': {
+			node: {
+				extensions: [
+					'.js',
+					'.mjs',
+					'.cjs',
+					'.jsx',
+					'.json',
+				],
+			},
+		},
 	},
 	rules: {
 		'import/no-unresolved': [

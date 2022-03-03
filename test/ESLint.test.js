@@ -9,6 +9,8 @@ const extensions = [
 	'.js',
 	'.cjs',
 	'.mjs',
+	'.vue',
+	'.ts',
 ];
 
 
@@ -76,6 +78,48 @@ describe('ESLint - Vue', function () {
 		lintResults = await eslint.lintFiles('.');
 
 		describe('ESLint - Vue results', () => {
+
+			for (const { filePath, messages, } of lintResults) {
+
+				it(`Validate ${filePath}`, () => {
+					if (messages.length > 0) {
+						assert.strictEqual('Test failed', null, formatMessages(messages));
+					}
+				});
+
+			}
+
+		});
+	});
+
+	it('Run ESlint', () => { });
+
+});
+
+describe('ESLint - Typescript', function () {
+	const eslint = new ESLint({
+		extensions,
+		overrideConfig: {
+			extends  : [ '@zekfad/eslint-config/typescript', ],
+			overrides: [
+				{
+					files: [ '*.ts', ],
+					rules: {
+						'import/no-unresolved': [ 'off', ],
+					},
+				},
+			],
+		},
+	});
+
+	this.timeout(2 * 60 * 1000);
+
+	let lintResults;
+
+	before(async () => {
+		lintResults = await eslint.lintFiles('.');
+
+		describe('ESLint - Typescript results', () => {
 
 			for (const { filePath, messages, } of lintResults) {
 

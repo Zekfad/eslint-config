@@ -3,13 +3,11 @@ import {
 	join as joinPath,
 } from 'path';
 
-import babelProposalClassProperties from '@babel/plugin-proposal-class-properties';
-import babelProposalNullishCoalescingOperator from '@babel/plugin-proposal-nullish-coalescing-operator';
-import babelProposalOptionalChaining from '@babel/plugin-proposal-optional-chaining';
 import { babel, } from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import resolve from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
 import builtins from 'builtin-modules';
 import { terser, } from 'rollup-plugin-terser';
 
@@ -20,10 +18,12 @@ const
 		src: {
 			main: resolvePath('./src/main'),
 			vue : resolvePath('./src/vue'),
+			ts  : resolvePath('./src/typescript'),
 		},
 		dist: {
 			main: resolvePath('./dist/main'),
 			vue : resolvePath('./dist/vue'),
+			ts  : resolvePath('./dist/typescript'),
 		},
 	},
 	external = builtins;
@@ -32,17 +32,18 @@ let plugins = [];
 
 plugins.push(...[
 	babel({
-		exclude: 'node_modules/**',
-		plugins: [
-			babelProposalClassProperties,
-			babelProposalOptionalChaining,
-			babelProposalNullishCoalescingOperator,
-		],
+		exclude     : 'node_modules/**',
 		babelHelpers: 'bundled',
 	}),
 	json(),
 	resolve({
+		extensions: [
+			'.mjs', '.js', '.cjs', '.json', '.node',
+		],
 		preferBuiltins: true,
+	}),
+	typescript({
+		noEmitOnError: true,
 	}),
 	commonjs(),
 ]);
@@ -98,6 +99,25 @@ export default [
 			},
 			{
 				file     : joinPath(dirs.dist.vue, 'esm', 'bundle.mjs'),
+				format   : 'es',
+				sourcemap: devMode,
+				exports  : 'auto',
+			},
+		],
+		plugins,
+		external,
+	},
+	{
+		input : joinPath(dirs.src.ts, 'index.ts'),
+		output: [
+			{
+				file     : joinPath(dirs.dist.ts, 'cjs', 'bundle.cjs'),
+				format   : 'cjs',
+				sourcemap: devMode,
+				exports  : 'auto',
+			},
+			{
+				file     : joinPath(dirs.dist.ts, 'esm', 'bundle.mjs'),
 				format   : 'es',
 				sourcemap: devMode,
 				exports  : 'auto',

@@ -4,7 +4,6 @@
 
 /**
  * Vue ESLint config.
- * @type object
  */
 const config = {
 	env: {
@@ -43,6 +42,7 @@ const config = {
 					'.js',
 					'.mjs',
 					'.cjs',
+					'.jsx',
 					'.vue',
 					'.json',
 					'.css',
@@ -64,10 +64,7 @@ const config = {
 			'error',
 			{
 				singleline: 2,
-				multiline : {
-					max           : 1,
-					allowFirstLine: true,
-				},
+				multiline : 1,
 			},
 		],
 		'vue/html-closing-bracket-newline': [ 'off', ],
